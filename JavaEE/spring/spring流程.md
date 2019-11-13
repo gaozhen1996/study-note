@@ -1,3 +1,11 @@
+# 前言
+
+spring ioc最核心的步骤，是注册配置bean，扫描bean。
+
+发现一篇写得非常好的博客 https://www.ibm.com/developerworks/cn/java/j-lo-spring-principle/ 
+
+
+
 # 一、注册
 
 
@@ -62,6 +70,76 @@ PostProcessorRegistrationDelegate.java
 			postProcessor.postProcessBeanDefinitionRegistry(registry);
 		}
         
+    }
+```
+
+ConfigurationClassPostProcessor.java
+
+这个类实现了BeanDefinitionRegistryPostProcessor接口
+
+```java
+	public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) {
+		processConfigBeanDefinitions(registry);
+	}
+	
+	public void processConfigBeanDefinitions(BeanDefinitionRegistry registry) {
+        //第一步：获取容器中所有的配置bean，获取的代码省略，需要注意的是，加了Component，ComponentScan
+        //Import,ImportResource注解的也会被作为配置类处理
+        List<BeanDefinitionHolder> configCandidates = new ArrayList<>();
+        Set<BeanDefinitionHolder> candidates = new LinkedHashSet<>(configCandidates);
+        do {
+            //第二步：解析配置bean
+            parser.parse(candidates);
+        }(!candidates.isEmpty());
+    }
+
+	public void parse(Set<BeanDefinitionHolder> configCandidates) {
+        for (BeanDefinitionHolder holder : configCandidates) {
+			BeanDefinition bd = holder.getBeanDefinition();
+            if (bd instanceof AnnotatedBeanDefinition) {
+                	//判断如果是AnnotatedBeanDefinition才解析
+					parse(((AnnotatedBeanDefinition) bd).getMetadata(), 														holder.getBeanName());
+				}
+        }
+    }
+
+	protected final void parse(AnnotationMetadata metadata, String beanName) throws 																		IOException {
+        //封装为ConfigurationClass对象解析
+		processConfigurationClass(new ConfigurationClass(metadata, beanName));
+	}
+
+    /**
+    *解析ConfigurationClass对象
+    */
+	protected void processConfigurationClass(ConfigurationClass configClass) throws 																		IOException {
+        do {
+			sourceClass = doProcessConfigurationClass(configClass, sourceClass);
+		}
+		while (sourceClass != null);
+    }
+
+	protected final SourceClass doProcessConfigurationClass(ConfigurationClass 			   					configClass, SourceClass sourceClass)throws IOException {
+        // Process any @ComponentScan annotations (源码的注释)
+ 		Set<AnnotationAttributes> componentScans = AnnotationConfigUtils
+     				.attributesForRepeatable(sourceClass.getMetadata(), 			                                                  ComponentScans.class, 
+                                             ComponentScan.class);
+        
+        for (AnnotationAttributes componentScan : componentScans) {
+			// config类被@ComponentScan注释->立即执行扫描
+			Set<BeanDefinitionHolder> scannedBeanDefinitions =
+				this.componentScanParser.parse(componentScan, 				      										sourceClass.getMetadata().getClassName());
+        }
+        
+    }
+```
+
+ComponentScanAnnotationParser.java
+
+```java
+	public Set<BeanDefinitionHolder> parse(AnnotationAttributes componentScan, final 															String declaringClass) {
+        //获取需要扫描的包
+        String[] basePackagesArray = componentScan.getStringArray("basePackages");
+        return scanner.doScan(StringUtils.toStringArray(basePackages));
     }
 ```
 
