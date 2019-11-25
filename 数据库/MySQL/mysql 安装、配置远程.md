@@ -1,6 +1,6 @@
 # 一.ubuntu上安装mysql
 
-```
+```shell
 sudo apt-get update 
 
 sudo apt-get install mysql-server 
@@ -10,19 +10,19 @@ sudo apt-get install mysql-server
 
 1.1进入mysql
 
-```
-mysql -u root -proot 
+```shell
+mysql -u root -p
 ```
 
 1.2修改数据权限
 
-```
+```sql
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root' WITH GRANT OPTION; 
 ```
 
 操作完后切记执行以下命令刷新权限 
 
-```
+```sql
 FLUSH PRIVILEGES ; 
 ```
 

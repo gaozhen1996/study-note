@@ -12,7 +12,6 @@ java的学习笔记
 - [martinfowler](https://martinfowler.com/) - martin fowler的博客
 - [美团点评技术团队](https://tech.meituan.com/) - 美团点评技术团队的博客
 - [CoolShell](https://coolshell.cn/) - 左耳朵耗子的酷壳
-- [并发编程网](http://ifeve.com/concurrency-site/) - 并发编程网
 - [developerworks](https://www.ibm.com/developerworks/cn/) - IBM developerworks
 - [伪架构师](https://blog.fleeto.us/) - 崔秀龙的博客
 - [Draveness's Blog](https://draveness.me/) - 面向信仰编程
