@@ -1,3 +1,5 @@
+[TOC]
+
 # 前言
 
 spring ioc最核心的步骤，是注册配置bean，获取扫描路径来扫描bean。
