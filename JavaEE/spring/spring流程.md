@@ -118,11 +118,11 @@ AbstractApplicationContext.java
 	protected void invokeBeanFactoryPostProcessors(
         				ConfigurableListableBeanFactory beanFactory) {
         /*委托PostProcessorRegistrationDelegate,来对beanFactory执行BeanFactoryPostProcessor
-        在这个类中，有一个属性List<BeanFactoryPostProcessor>，存放时是需要执行的后置处理器
         值得一提的是，在之前注册的步骤，实例化AnnotatedBeanDefinitionReader对象的时候，
         在构造方法中，调用了
         AnnotationConfigUtils.registerAnnotationConfigProcessors(this.registry)
         这个方法注册了一些默认的后置处理器对象，具体可以看源码
+        重要，重要，重要！！！这个时候添加了非常重要的类ConfigurationClassPostProcessor，之后的解析		 全是在这个类中完成的。
         */
 		PostProcessorRegistrationDelegate
             .invokeBeanFactoryPostProcessors(beanFactory,getBeanFactoryPostProcessors());
@@ -135,7 +135,33 @@ PostProcessorRegistrationDelegate.java
 	public static void invokeBeanFactoryPostProcessors(
 			ConfigurableListableBeanFactory beanFactory, 
             List<BeanFactoryPostProcessor> beanFactoryPostProcessors) {
-        //执行BeanDefinitionRegistryPostProcessor
+        /**
+         *值得注意的是，在这个方法中，定义了两个List<BeanDefinitionRegistryPostProcessor>
+         *一个是registryProcessors，这个数据来源是beanFactoryPostProcessors，它的作用是获取
+         *用户自定义的BeanDefinitionRegistryPostProcessor，来执行
+         *而
+         */
+        List<BeanDefinitionRegistryPostProcessor> registryProcessors = new ArrayList<>();
+        for (BeanFactoryPostProcessor postProcessor : beanFactoryPostProcessors) {
+            if (postProcessor instanceof BeanDefinitionRegistryPostProcessor) {
+                BeanDefinitionRegistryPostProcessor registryProcessor =
+                    (BeanDefinitionRegistryPostProcessor) postProcessor;
+                /**
+                 *执行用户自定义的BeanDefinitionRegistryPostProcessor
+                 *测试代码https://github.com/gaozhen1996/study-java/blob/master
+                        /src/main/java/com/gz/javastudy/springapp/TestMain.java的
+                   testExecuteCustomBeanFactoryPostProcessor();方法
+                 */
+                registryProcessor.postProcessBeanDefinitionRegistry(registry);
+                registryProcessors.add(registryProcessor);
+            }
+            else {
+                regularPostProcessors.add(postProcessor);
+            }
+		}
+        //重要，重要，重要！！！执行BeanDefinitionRegistryPostProcessor
+        List<BeanDefinitionRegistryPostProcessor> currentRegistryProcessors 
+                                   = new ArrayList<>();
         invokeBeanDefinitionRegistryPostProcessors(currentRegistryProcessors, registry);
     } 
 
