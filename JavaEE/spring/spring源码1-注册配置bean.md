@@ -28,7 +28,7 @@ spring ioc最核心的步骤，是注册配置bean，获取扫描路径来扫描
 
 # 2.流程
 
-AnnotationConfigApplicationContext.java
+## AnnotationConfigApplicationContext.java
 
 ```java
 	public AnnotationConfigApplicationContext(Class<?>... annotatedClasses) {
@@ -44,7 +44,7 @@ AnnotationConfigApplicationContext.java
 	}
 ```
 
-AnnotatedBeanDefinitionReader.java
+## AnnotatedBeanDefinitionReader.java
 
 ```java
 	public void register(Class<?>... annotatedClasses) {
