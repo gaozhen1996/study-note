@@ -88,19 +88,19 @@
         Collection<? extends BeanDefinitionRegistryPostProcessor> postProcessors, 													BeanDefinitionRegistry registry) {
         //干扰BeanDefinitionRegistry的处理
         for (BeanDefinitionRegistryPostProcessor postProcessor : postProcessors) {
-						postProcessor.postProcessBeanDefinitionRegistry(registry);
-				}
+			postProcessor.postProcessBeanDefinitionRegistry(registry);
+		}
         
     }
 ```
 
 ## ConfigurationClassPostProcessor.java
 
-这个类实现了BeanDefinitionRegistryPostProcessor接口
+这gistryPostProcessor接口
 
 ```java
 	public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) {
-			processConfigBeanDefinitions(registry);
+		processConfigBeanDefinitions(registry);
 	}
 	
 	public void processConfigBeanDefinitions(BeanDefinitionRegistry registry) {
