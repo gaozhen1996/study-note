@@ -41,3 +41,30 @@ ClassLoader不会执行static代码块
 初始化：激活类的静态变量的初始化Java代码和静态Java代码块，并初始化程序员设置的变量值。
 ```
 
+## 2.源码分析
+
+Class.forName(className) 调用的底层源码是
+
+```java
+    @CallerSensitive
+    public static Class<?> forName(String className)
+                throws ClassNotFoundException {
+        Class<?> caller = Reflection.getCallerClass();
+        return forName(className, true, ClassLoader.getClassLoader(caller), caller);
+    }
+
+    /**
+      * 参数一：className，需要加载的类的名称。
+      *	参数二：true，是否对class进行初始化（需要initialize）
+      * 参数三：classLoader，对应的类加载器
+      */  
+    public static Class<?> forName(String name, boolean initialize,
+                                       ClassLoader loader)
+```
+
+在调用forName方法是，第二个参数选择的true，因此会对类进行初始化，会执行类的静态代码块和静态变量赋值。
+
+
+
+完整源码见： https://github.com/gaozhen1996/study-java/blob/master/src/main/java/com/gz/javastudy/javase/reflect/ClassforNameORClassLoader.java 
+
