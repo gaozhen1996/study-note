@@ -23,3 +23,9 @@ GRANT ALL PRIVILEGES ON *.* TO 'root'@'访问IP' IDENTIFIED BY '数据库密码'
 flush privileges;
 ```
 
+# 4.刷新权限
+
+```sql
+ flush privileges;
+```
+
