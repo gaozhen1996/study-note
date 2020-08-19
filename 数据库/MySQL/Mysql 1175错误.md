@@ -8,3 +8,4 @@ MySql 执行 DELETE FROM Table 时，报 Error Code: 1175.
 ```
 SET SQL_SAFE_UPDATES = 0;
 ```
+
