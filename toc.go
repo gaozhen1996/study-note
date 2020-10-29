@@ -29,6 +29,8 @@ func main() {
 		"img":1,
 		"README.md":1,
 		"toc.go":1,
+		"生成目录.bat":1,
+
 	}
 	clu := CataLogUtil{
 		catalogFileName: "README.md",
@@ -66,7 +68,7 @@ func (self *CataLogUtil) readDir(level int , path string) {
 			continue
 		}
 
-		newPath := path + "\\" +file.Name()
+		newPath := path + "/" +file.Name()
 		//拼接前缀
 		//如果是一级目录，格式为: # 一级目录
 		//不是一级目录，则格式为 - 其他目录
@@ -86,7 +88,7 @@ func (self *CataLogUtil) readDir(level int , path string) {
 			self.buffer.WriteString(catalogLine)
 			self.readDir(level+1,newPath)
 		}else{
-			relativePath := strings.Replace(newPath,self.rootDir+"\\","",-1)
+			relativePath := strings.Replace(newPath,self.rootDir+"/","",-1)
 			catalogLine =  fmt.Sprintf(" %s <a style='text-decoration:none;' href='%s'>%s</a>\n",pre,relativePath,file.Name())
 			self.buffer.WriteString(catalogLine)
 		}
