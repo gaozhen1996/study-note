@@ -15,9 +15,9 @@
    - <a style='text-decoration:none;' href='JavaEE/nginx/在Ubuntu系统上安装Nginx服务器.md'>在Ubuntu系统上安装Nginx服务器.md</a>
  - spring
    - <a style='text-decoration:none;' href='JavaEE/spring/@Configuration与@Component的区别.md'>@Configuration与@Component的区别.md</a>
-   - <a style='text-decoration:none;' href='JavaEE/spring/spring源码-实例化单例对象.md'>spring源码-实例化单例对象.md</a>
    - <a style='text-decoration:none;' href='JavaEE/spring/spring源码1-注册配置bean.md'>spring源码1-注册配置bean.md</a>
    - <a style='text-decoration:none;' href='JavaEE/spring/spring源码2-扫描bean.md'>spring源码2-扫描bean.md</a>
+   - <a style='text-decoration:none;' href='JavaEE/spring/spring源码3-实例化单例对象.md'>spring源码3-实例化单例对象.md</a>
  - springboot
    - <a style='text-decoration:none;' href='JavaEE/springboot/springboot单元测试.md'>springboot单元测试.md</a>
    - <a style='text-decoration:none;' href='JavaEE/springboot/springboot跨域.md'>springboot跨域.md</a>
@@ -37,7 +37,6 @@
    - <a style='text-decoration:none;' href='JavaSE/java-并发/3.java常用线程池.md'>3.java常用线程池.md</a>
    - <a style='text-decoration:none;' href='JavaSE/java-并发/4.sleep与wait的区别.md'>4.sleep与wait的区别.md</a>
    - <a style='text-decoration:none;' href='JavaSE/java-并发/详解synchronized与Lock的区别与使用 .md'>详解synchronized与Lock的区别与使用 .md</a>
- - java-集合
   - <a style='text-decoration:none;' href='JavaSE/mac配置多jdk.md'>mac配置多jdk.md</a>
 # Java虚拟机
   - <a style='text-decoration:none;' href='Java虚拟机/1.对象内存布局.md'>1.对象内存布局.md</a>
@@ -75,5 +74,3 @@
  - redis
    - <a style='text-decoration:none;' href='数据库/redis/redis安装，启动，远程.md'>redis安装，启动，远程.md</a>
    - <a style='text-decoration:none;' href='数据库/redis/redis服务停止，重启，启动.md'>redis服务停止，重启，启动.md</a>
-
-# 数据结构
