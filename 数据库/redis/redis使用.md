@@ -244,7 +244,7 @@ getset # 先get然后在set
 
 所有的list命令都是用l开头的，Redis不区分大小命令
 
-```
+```reids
 127 .0.0.1:6379> LPUSH list one  # 将一个值或者多个值，插入到列表头部 （左）
 (integer) 1
 127 .0.0.1:6379> LPUSH list two
@@ -294,14 +294,14 @@ Llen
 127 .0.0.1:6379> Lpush list one
 (integer) 1
 127 .0.0.1:6379> Lpush list two
-bilibili：狂神说Java
-```
-
 (integer) 2
 127 .0.0.1:6379> Lpush list three
 (integer) 3
 127 .0.0.1:6379> Llen list # 返回列表的长度
 (integer) 3
+```
+
+
 
 \##########################################################################
 移除指定的值！
