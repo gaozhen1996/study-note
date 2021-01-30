@@ -1,6 +1,6 @@
 # 什么是NoSQL
 
-## NoSQL
+## NoSQL 简介
 
 NoSQL = Not Only SQL （不仅仅是SQL）
 
@@ -42,7 +42,7 @@ Nosql
 - 高性能，高可用，高可扩
 - ....
 
-## 不同的数据使用场景
+## 数据库使用场景
 
 - 商品的基本信息
   - 名称、价格、商家信息
@@ -138,13 +138,11 @@ Redis 是一个开源（BSD许可）的，内存中的数据结构存储系统�
 驱动事件（LRU eviction），事务（transactions） 和不同级别的 磁盘持久化（persistence）， 并通过
 Redis哨兵（Sentinel）和自动 分区（Cluster）提供高可用性（high availability）。
 
-## Redis-Key
-
 ## String（字符串）
 
 90% 的 java程序员使用 redis 只会使用一个String类型！
 
-- 字符串范围 range
+### range字符串范围 
 
 ```redis
 127.0.0.1:6379> keys *
@@ -158,7 +156,7 @@ OK
 127.0.0.1:6379> 
 ```
 
-- 替换
+### setrange替换
 
 ```redis
 127.0.0.1:6379> set key2 123abc
@@ -172,7 +170,7 @@ OK
 127.0.0.1:6379> 
 ```
 
-- setex (set with expire) 设置过期时间
+###  setex设置过期时间
 
 ```
 # 设置key3 的值为 hello,30秒后过期
@@ -199,7 +197,9 @@ OK
 127.0.0.1:6379> 
 ```
 
-- setnx (set if not exist) # 不存在在设置 （在分布式锁中会常常使用！）
+### setnx  不存在在设置
+
+setnx (set if not exist) # 不存在在设置 （在分布式锁中会常常使用！）
 
 ```redis
 127.0.0.1:6379> set lock:user "user1"
@@ -211,7 +211,7 @@ OK
 127.0.0.1:6379>
 ```
 
-- 其他命令
+### 其他命令
 
 ```
 127 .0.0.1:6379> msetnx k1 v1 k4 v4  # msetnx 是一个原子性的操作，要么一起成功，要么一起失败！
@@ -230,8 +230,6 @@ getset # 先get然后在set
 "mongodb"
 ```
 
-
-
 - String类似的使用场景：value除了字符串还可以是数字
   - 计数器
   - 统计多单位的数量
@@ -244,7 +242,13 @@ getset # 先get然后在set
 
 所有的list命令都是用l开头的，Redis不区分大小命令
 
+<<<<<<< HEAD
+### LPUSH,LRANGE,Rpush
+
+```
+=======
 ```reids
+>>>>>>> d9b7dae9e09e46cae2bc29c01c3b0a2194415a4b
 127 .0.0.1:6379> LPUSH list one  # 将一个值或者多个值，插入到列表头部 （左）
 (integer) 1
 127 .0.0.1:6379> LPUSH list two
@@ -265,7 +269,11 @@ getset # 先get然后在set
 2 ) "two"
 3 ) "one"
 4 ) "righr"
-##########################################################################
+```
+
+### LPOP,RPOP,Lindex,Llen
+
+```
 LPOP
 RPOP
 127 .0.0.1:6379> LRANGE list 0 -1
@@ -300,15 +308,16 @@ Llen
 127 .0.0.1:6379> Llen list # 返回列表的长度
 (integer) 3
 ```
+<<<<<<< HEAD
+=======
 
 
+>>>>>>> d9b7dae9e09e46cae2bc29c01c3b0a2194415a4b
 
-\##########################################################################
-移除指定的值！
-取关 uid
+### Lrem移除指定的值
 
-Lrem
-127 .0.0.1:6379> LRANGE list 0 -1
+```
+127.0.0.1:6379> LRANGE list 0 -1
 1 ) "three"
 2 ) "three"
 3 ) "two"
@@ -330,10 +339,11 @@ Lrem
 (integer) 2
 127 .0.0.1:6379> LRANGE list 0 -1
 1 ) "two"
+```
 
-\##########################################################################
-trim 修剪。； list 截断!
+### ltrim 截断
 
+```
 127 .0.0.1:6379> keys *
 (empty list or set)
 127 .0.0.1:6379> Rpush mylist "hello"
@@ -344,24 +354,18 @@ trim 修剪。； list 截断!
 (integer) 3
 127 .0.0.1:6379> Rpush mylist "hello3"
 (integer) 4
-127 .0.0.1:6379> ltrim mylist 1 2 # 通过下标截取指定的长度，这个list已经被改变了，截断了
-只剩下截取的元素！
+127 .0.0.1:6379> ltrim mylist 1 3 # 1 是截取开始的下标，3是截取结束的下标
 OK
 127 .0.0.1:6379> LRANGE mylist 0 -1
-1 ) "hello1"
-2 ) "hello2"
+1) "hello2"
+2) "hello3"
+3) "hello4"
+```
 
-\##########################################################################
-rpoplpush # 移除列表的最后一个元素，将他移动到新的列表中！
+### rpoplpush  移动list的最后一个元素到新的list中
 
+```
 127 .0.0.1:6379> rpush mylist "hello"
-
-```
-他实际上是一个链表，before Node after ， left，right 都可以插入值
-如果key 不存在，创建新的链表
-如果key存在，新增内容
-```
-
 (integer) 1
 127 .0.0.1:6379> rpush mylist "hello1"
 (integer) 2
@@ -375,9 +379,11 @@ rpoplpush # 移除列表的最后一个元素，将他移动到新的列表中�
 2 ) "hello1"
 127 .0.0.1:6379> lrange myotherlist 0 -1 # 查看目标列表中，确实存在改值！
 1 ) "hello2"
+```
 
-\##########################################################################
-lset 将列表中指定下标的值替换为另外一个值，更新操作
+### lset 更新指定下标的值
+
+```
 127 .0.0.1:6379> EXISTS list # 判断这个列表是否存在
 (integer) 0
 127 .0.0.1:6379> lset list 0 item # 如果不存在列表我们去更新就会报错
@@ -392,9 +398,11 @@ OK
 1 ) "item"
 127 .0.0.1:6379> lset list 1 other # 如果不存在，则会报错！
 (error) ERR index out of range
-\##########################################################################
-linsert # 将某个具体的value插入到列把你中某个元素的前面或者后面！
+```
 
+### linsert # 将某个具体的value插入到指定元素的前面或者后面！
+
+```
 127 .0.0.1:6379> Rpush mylist "hello"
 (integer) 1
 127 .0.0.1:6379> Rpush mylist "world"
@@ -412,966 +420,358 @@ linsert # 将某个具体的value插入到列把你中某个元素的前面或�
 2 ) "other"
 3 ) "world"
 4 ) "new"
-
-消息排队！消息队列 （Lpush Rpop）， 栈（ Lpush Lpop）！
+```
 
 ## Set（集合）
 
-set中的值是不能重读的！
+### sadd 添加 smembers 查看 
 
 ```
-##########################################################################
 127 .0.0.1:6379> sadd myset "hello" # set集合中添加匀速
 (integer) 1
-127 .0.0.1:6379> sadd myset "kuangshen"
+127 .0.0.1:6379> sadd myset "gaozhen"
 (integer) 1
-127 .0.0.1:6379> sadd myset "lovekuangshen"
+127 .0.0.1:6379> sadd myset "gz"
 (integer) 1
 127 .0.0.1:6379> SMEMBERS myset # 查看指定set的所有值
-1 ) "hello"
-2 ) "lovekuangshen"
-3 ) "kuangshen"
+1) "gz"
+2) "gaozhen"
+3) "hello"
+```
+
+### sismember存在 scard 个数
+
+```
 127 .0.0.1:6379> SISMEMBER myset hello  # 判断某一个值是不是在set集合中！
 (integer) 1
 127 .0.0.1:6379> SISMEMBER myset world
 (integer) 0
-##########################################################################
 127 .0.0.1:6379> scard myset  # 获取set集合中的内容元素个数！
 (integer) 4
-##########################################################################
-rem
+```
+
+### srem 删除
+
+```
 127 .0.0.1:6379> srem myset hello  # 移除set集合中的指定元素
 (integer) 1
 127 .0.0.1:6379> scard myset
-(integer) 3
+(integer) 
 127 .0.0.1:6379> SMEMBERS myset
-1 ) "lovekuangshen2"
-2 ) "lovekuangshen"
-3 ) "kuangshen"
-##########################################################################
-set 无序不重复集合。抽随机！
-127 .0.0.1:6379> SMEMBERS myset
-1 ) "lovekuangshen2"
-2 ) "lovekuangshen"
-3 ) "kuangshen"
-127 .0.0.1:6379> SRANDMEMBER myset  # 随机抽选出一个元素
-"kuangshen"
-127 .0.0.1:6379> SRANDMEMBER myset
-"kuangshen"
-127 .0.0.1:6379> SRANDMEMBER myset
-"kuangshen"
-127 .0.0.1:6379> SRANDMEMBER myset
-"kuangshen"
-127 .0.0.1:6379> SRANDMEMBER myset 2 # 随机抽选出指定个数的元素
-bilibili：狂神说Java
+1) "gz"
+2) "gaozhen"
 ```
 
-1 ) "lovekuangshen"
-2 ) "lovekuangshen2"
-127 .0.0.1:6379> SRANDMEMBER myset 2
-1 ) "lovekuangshen"
-2 ) "lovekuangshen2"
-127 .0.0.1:6379> SRANDMEMBER myset # 随机抽选出一个元素
-"lovekuangshen2"
+### srandmember 随机抽取
 
-\##########################################################################
-删除定的key，随机删除key！
+```
+127.0.0.1:6379> smembers myset
+1) "gz"
+2) "gaozhen"
+127.0.0.1:6379> srandmember myset# 随机抽选出一个元素
+"gz"
+127.0.0.1:6379> srandmember myset
+"gz"
+127.0.0.1:6379> srandmember myset
+"gaozhen"
+127.0.0.1:6379> srandmember myset
+"gaozhen"
+127.0.0.1:6379> srandmember myset
+"gaozhen"
+127.0.0.1:6379> srandmember myset
+"gaozhen"
+127.0.0.1:6379> srandmember myset 2 # 随机抽选出指定个数的元素
+1) "gz"
+2) "gaozhen"
+127.0.0.1:6379> 
+```
 
-127 .0.0.1:6379> SMEMBERS myset
-1 ) "lovekuangshen2"
-2 ) "lovekuangshen"
-3 ) "kuangshen"
-127 .0.0.1:6379> spop myset # 随机删除一些set集合中的元素！
-"lovekuangshen2"
-127 .0.0.1:6379> spop myset
-"lovekuangshen"
-127 .0.0.1:6379> SMEMBERS myset
-1 ) "kuangshen"
+### spop 随机删除
 
-\##########################################################################
-将一个指定的值，移动到另外一个set集合！
-127 .0.0.1:6379> sadd myset "hello"
-(integer) 1
-127 .0.0.1:6379> sadd myset "world"
-(integer) 1
-127 .0.0.1:6379> sadd myset "kuangshen"
-(integer) 1
-127 .0.0.1:6379> sadd myset2 "set2"
-(integer) 1
-127 .0.0.1:6379> smove myset myset2 "kuangshen" # 将一个指定的值，移动到另外一个set集
-合！
-(integer) 1
-127 .0.0.1:6379> SMEMBERS myset
-1 ) "world"
-2 ) "hello"
-127 .0.0.1:6379> SMEMBERS myset2
-1 ) "kuangshen"
-2 ) "set2"
+```
+127.0.0.1:6379> smembers myset
+1) "gaozhen"
+2) "gaozhen2"
+3) "gaozhen1"
+127.0.0.1:6379> spop myset #随机删除指定set的元素
+"gaozhen"
+127.0.0.1:6379> smembers myset
+1) "gaozhen2"
+2) "gaozhen1"
+```
 
-\##########################################################################
-微博，B站，共同关注！(并集)
-数字集合类：
+### smove 移动
 
-- 差集 SDIFF
-- 交集
+```
+127.0.0.1:6379> sadd a_set "a1"
+(integer) 1
+127.0.0.1:6379> sadd a_set "a2"
+(integer) 1
+127.0.0.1:6379> sadd b_set "b1"
+(integer) 1
+127.0.0.1:6379> smembers a_set
+1) "a2"
+2) "a1"
+127.0.0.1:6379> smembers b_set
+1) "b1"
+127.0.0.1:6379> smove a_set b_set "a1" # 将指定的值，移动到另外一个set集合
+(integer) 1
+127.0.0.1:6379> smembers a_set
+1) "a2"
+127.0.0.1:6379> smembers b_set
+1) "b1"
+2) "a1"
+```
+
+
+
+### 数字集合类
+
+- 差集 sdiff
+
+  ```
+  127.0.0.1:6379> smembers a_set
+  1) "a2"
+  2) "a1"
+  127.0.0.1:6379> smembers b_set
+  1) "b1"
+  2) "a1"
+  127.0.0.1:6379> sdiff a_set b_set #查询a_set有，b_set没有的差集
+  1) "a2"
+  127.0.0.1:6379> sdiff b_set a_set #查询b_set有，a_set没有的差集
+  1) "b1"
+  ```
+
+- 交集 sinter
+
+  ```
+  127.0.0.1:6379> sinter a_set b_set #查询a_set和b_set中的交集，实践中可以实现共同好友
+  1) "a1"
+  ```
+
 - 并集
-  127 .0.0.1:6379> SDIFF key1 key2 # 差集
-  1 ) "b"
-  2 ) "a"
-  127 .0.0.1:6379> SINTER key1 key2 # 交集 共同好友就可以这样实现
-  1 ) "c"
-  127 .0.0.1:6379> SUNION key1 key2 # 并集
-  1 ) "b"
-  2 ) "c"
-  3 ) "e"
-  4 ) "a"
 
-```
-bilibili：狂神说Java
-```
+  ```
+  127.0.0.1:6379> sunion a_set b_set #查询a_set和b_set中并集
+  1) "b1"
+  2) "a2"
+  3) "a1"
+  ```
 
-微博，A用户将所有关注的人放在一个set集合中！将它的粉丝也放在一个集合中！
-
-共同关注，共同爱好，二度好友，推荐好友！（六度分割理论）
+  
 
 ## Hash（哈希）
 
-Map集合，key-map! 时候这个值是一个map集合！ 本质和String类型没有太大区别，还是一个简单的
-key-vlaue！
-
-set myhash field kuangshen
+### hset hget
 
 ```
-5 ) "d"
-```
-
-#### 
-
-```
-127 .0.0.1:6379> hset myhash field1 kuangshen  # set一个具体 key-vlaue
+127.0.0.1:6379> hset myhash k1 v1     #添加key和value
 (integer) 1
-127 .0.0.1:6379> hget myhash field1  # 获取一个字段值
-"kuangshen"
-127 .0.0.1:6379> hmset myhash field1 hello field2 world # set多个 key-vlaue
+127.0.0.1:6379> hmset myhash k2 v2 k3 v3  #一次添加多个key和value
 OK
-127 .0.0.1:6379> hmget myhash field1 field2 # 获取多个字段值
-1 ) "hello"
-2 ) "world"
-127 .0.0.1:6379> hgetall myhash # 获取全部的数据，
-1 ) "field1"
-2 ) "hello"
-3 ) "field2"
-4 ) "world"
-127 .0.0.1:6379> hdel myhash field1  # 删除hash指定key字段！对应的value值也就消失了！
+127.0.0.1:6379> hget myhash k1        #根据key来查询value
+"v1"
+127.0.0.1:6379> hmget myhash k1 k2 k3  #查询多个key的value
+1) "v1"
+2) "v2"
+3) "v3"
+```
+
+###  hkeys hdel 
+
+```
+127.0.0.1:6379> hkeys myhash
+1) "k2"
+2) "k3"
+3) "k1"
+
+127.0.0.1:6379> hdel myhash k1 #删除指定的key
 (integer) 1
-127 .0.0.1:6379> hgetall myhash
-1 ) "field2"
-2 ) "world"
-##########################################################################
-hlen
-127 .0.0.1:6379> hmset myhash field1 hello field2 world
-OK
-127 .0.0.1:6379> HGETALL myhash
-1 ) "field2"
-2 ) "world"
-3 ) "field1"
-4 ) "hello"
+127.0.0.1:6379> hkeys myhash
+1) "k2"
+2) "k3"
+
+
 127 .0.0.1:6379> hlen myhash  # 获取hash表的字段数量！
 (integer) 2
-##########################################################################
-127 .0.0.1:6379> HEXISTS myhash field1  # 判断hash中指定字段是否存在！
+
+127.0.0.1:6379> hexists myhash k2 #判断指定的key是否存在
 (integer) 1
-127 .0.0.1:6379> HEXISTS myhash field3
+127.0.0.1:6379> hexists myhash k1
 (integer) 0
-##########################################################################
-# 只获得所有field
-# 只获得所有value
-127 .0.0.1:6379> hkeys myhash  # 只获得所有field
-1 ) "field2"
-2 ) "field1"
-bilibili：狂神说Java
+127.0.0.1:6379> 
 ```
 
-hash变更的数据 user name age,尤其是是用户信息之类的，经常变动的信息！ hash 更适合于对象的
-存储，String更加适合字符串存储！
+### hgetall  hexists  hlen hvals
+
+```
+127.0.0.1:6379> hgetall myhash #获取key和value
+1) "k2"
+2) "v2"
+3) "k3"
+4) "v3"
+
+127.0.0.1:6379> hexists myhash k1 #判断key是否存在
+(integer) 0
+127.0.0.1:6379> hexists myhash k2
+(integer) 1
+127.0.0.1:6379> 
+
+127.0.0.1:6379> hlen myhash #查询key的数量
+(integer) 2
+
+127.0.0.1:6379> hvals myhash #获取所有的value
+1) "v2"
+2) "v3"
+```
+
+### hincrby增量 hsetnx不存在添加
+
+```
+127.0.0.1:6379> incr decr 
+(integer) 1
+127.0.0.1:6379> hset myhash v1 5  #初始化 v1=5
+(integer) 1
+127.0.0.1:6379> hget myhash v1    #查询结果
+"5"
+127.0.0.1:6379> hincrby myhash v1 2 #该命令会将增量相加 7=5+2
+(integer) 7
+127.0.0.1:6379> hget myhash v1     #查询结果
+"7"
+127.0.0.1:6379> hincrby myhash v1 3 #该命令会将增量相加 10=7+3
+(integer) 10
+127.0.0.1:6379> hget myhash v1   #查询结果
+"10"
+
+127.0.0.1:6379> hsetnx myhash v1 1 #如果存在则不能设置
+(integer) 0
+127.0.0.1:6379> hsetnx myhash v4 1 #如果不存在则可以设置
+(integer) 1
+```
+
+
 
 ## Zset（有序集合）
 
-在set的基础上，增加了一个值，set k1 v1 zset k1 score1 v1
+### zadd zrange
 
 ```
-127 .0.0.1:6379> hvals myhash  # 只获得所有value
-1 ) "world"
-2 ) "hello"
-##########################################################################
-incr decr
-127 .0.0.1:6379> hset myhash field3 5 #指定增量！
+127.0.0.1:6379> zadd salary 1500 a #添加一个值
 (integer) 1
-127 .0.0.1:6379> HINCRBY myhash field3 1
-(integer) 6
-127 .0.0.1:6379> HINCRBY myhash field3 -1
-(integer) 5
-127 .0.0.1:6379> hsetnx myhash field4 hello  # 如果不存在则可以设置
+127.0.0.1:6379> zadd salary 5000 b
 (integer) 1
-127 .0.0.1:6379> hsetnx myhash field4 world  # 如果存在则不能设置
-(integer) 0
-127 .0.0.1:6379> zadd myset 1 one # 添加一个值
+127.0.0.1:6379> zadd salary 500 c
 (integer) 1
-127 .0.0.1:6379> zadd myset 2 two 3 three # 添加多个值
+127.0.0.1:6379> zrange salary 0 -1 #按照权重从小到大遍历
+1) "c"
+2) "a"
+3) "b"
+```
+
+### zrangebyscore  zrevrange
+
+```
+127.0.0.1:6379> zrangebyscore salary -inf +inf #按照权重从小到大遍历
+1) "c"
+2) "a"
+3) "b"
+
+127.0.0.1:6379> zrevrange salary 0 -1  #从大到进行排序
+1) "b"
+2) "a"
+3) "c"
+
+127.0.0.1:6379> zrangebyscore salary -inf +inf withscores #从小到大排序并显示权重
+1) "c"
+2) "500"
+3) "a"
+4) "1500"
+5) "b"
+6) "5000"
+
+127.0.0.1:6379> zrangebyscore salary -inf 2500 withscores #显示权重小于2500的数据
+1) "c"
+2) "500"
+3) "a"
+4) "1500"
+```
+
+应用场景，排行榜取TOP N
+
+### zrem删除 zcard计数
+
+```
+127.0.0.1:6379> zrange salary 0 -1
+1) "c"
+2) "a"
+3) "b"
+127.0.0.1:6379> zrem salary c #删除
+(integer) 1
+127.0.0.1:6379> zrange salary 0 -1
+1) "a"
+2) "b"
+
+127.0.0.1:6379> zcard salary #获取有序集合中的个数
 (integer) 2
-127 .0.0.1:6379> ZRANGE myset 0 -1
-1 ) "one"
-2 ) "two"
-3 ) "three"
-##########################################################################
-排序如何实现
-127 .0.0.1:6379> zadd salary 2500 xiaohong  # 添加三个用户
-(integer) 1
-127 .0.0.1:6379> zadd salary 5000 zhangsan
-(integer) 1
-127 .0.0.1:6379> zadd salary 500 kaungshen
-(integer) 1
-# ZRANGEBYSCORE key min max
-127 .0.0.1:6379> ZRANGEBYSCORE salary -inf +inf  # 显示全部的用户 从小到大！
-1 ) "kaungshen"
-2 ) "xiaohong"
-3 ) "zhangsan"
-127 .0.0.1:6379> ZREVRANGE salary 0 -1 # 从大到进行排序！
-1 ) "zhangsan"
-2 ) "kaungshen"
-127 .0.0.1:6379> ZRANGEBYSCORE salary -inf +inf withscores # 显示全部的用户并且附带成
-绩
-1 ) "kaungshen"
-2 ) "500"
-3 ) "xiaohong"
-bilibili：狂神说Java
-```
 
-#### 其与的一些API，通过我们的学习吗，你们剩下的如果工作中有需要，这个时候你可以去查查看官方文
-
-#### 档！
-
-案例思路：set 排序 存储班级成绩表，工资表排序！
-
-普通消息， 1 ， 重要消息 2 ，带权重进行判断！
-
-排行榜应用实现，取Top N 测试！
-
-# 三种特殊数据类型
-
-## Geospatial 地理位置
-
-#### 朋友的定位，附近的人，打车距离计算？
-
-Redis 的 Geo 在Redis3.2 版本就推出了！ 这个功能可以推算地理位置的信息，两地之间的距离，方圆
-几里的人！
-
-可以查询一些测试数据：http://www.jsons.cn/lngcodeinfo/0706D99C19A781A3/
-
-只有 六个命令：
-
-#### 4 ) "2500"
-
-```
-5 ) "zhangsan"
-6 ) "5000"
-127 .0.0.1:6379> ZRANGEBYSCORE salary -inf 2500 withscores # 显示工资小于 2500 员工的升
-序排序！
-1 ) "kaungshen"
-2 ) "500"
-3 ) "xiaohong"
-4 ) "2500"
-##########################################################################
-# 移除rem中的元素
-127 .0.0.1:6379> zrange salary 0 -1
-1 ) "kaungshen"
-2 ) "xiaohong"
-3 ) "zhangsan"
-127 .0.0.1:6379> zrem salary xiaohong # 移除有序集合中的指定元素
-(integer) 1
-127 .0.0.1:6379> zrange salary 0 -1
-1 ) "kaungshen"
-2 ) "zhangsan"
-127 .0.0.1:6379> zcard salary  # 获取有序集合中的个数
+127.0.0.1:6379> zcount salary 500 1500 #获取指定区间的成员数量
 (integer) 2
-##########################################################################
-127 .0.0.1:6379> zadd myset 1 hello
-(integer) 1
-127 .0.0.1:6379> zadd myset 2 world 3 kuangshen
-(integer) 2
-127 .0.0.1:6379> zcount myset 1 3 # 获取指定区间的成员数量！
-(integer) 3
-127 .0.0.1:6379> zcount myset 1 2
-(integer) 2
-bilibili：狂神说Java
 ```
-
-#### 、
-
-官方文档：https://www.redis.net.cn/order/3685.html
-
-```
-getadd
-getpos
-```
-
-#### 获得当前定位：一定是一个坐标值！
-
-#### GEODIST
-
-```
-# getadd 添加地理位置
-# 规则：两级无法直接添加，我们一般会下载城市数据，直接通过java程序一次性导入！
-# 有效的经度从-180度到 180 度。
-# 有效的纬度从-85.05112878度到85.05112878度。
-# 当坐标位置超出上述指定范围时，该命令将会返回一个错误。
-# 127.0.0.1:6379> geoadd china:city 39.90 116.40 beijin
-(error) ERR invalid longitude,latitude pair 39 .900000,116.400000
-# 参数 key 值（）
-127 .0.0.1:6379> geoadd china:city 116 .40 39 .90 beijing
-(integer) 1
-127 .0.0.1:6379> geoadd china:city 121 .47 31 .23 shanghai
-(integer) 1
-127 .0.0.1:6379> geoadd china:city 106 .50 29 .53 chongqi 114 .05 22 .52 shengzhen
-(integer) 2
-127 .0.0.1:6379> geoadd china:city 120 .16 30 .24 hangzhou 108 .96 34 .26 xian
-(integer) 2
-127 .0.0.1:6379> GEOPOS china:city beijing  # 获取指定的城市的经度和纬度！
-1 ) 1 ) "116.39999896287918091"
-2 ) "39.90000009167092543"
-127 .0.0.1:6379> GEOPOS china:city beijing chongqi
-1 ) 1 ) "116.39999896287918091"
-2 ) "39.90000009167092543"
-2 ) 1 ) "106.49999767541885376"
-2 ) "29.52999957900659211"
-bilibili：狂神说Java
-```
-
-#### 两人之间的距离！
-
-#### 单位：
-
-```
-m 表示单位为米。
-km 表示单位为千米。
-mi 表示单位为英里。
-ft 表示单位为英尺。
-georadius 以给定的经纬度为中心， 找出某一半径内的元素
-```
-
-#### 我附近的人？ （获得所有附近的人的地址，定位！）通过半径来查询！
-
-#### 获得指定数量的人， 200
-
-所有数据应该都录入：china:city ，才会让结果更加请求！
-
-```
-127 .0.0.1:6379> GEODIST china:city beijing shanghai km  # 查看上海到北京的直线距离
-"1067.3788"
-127 .0.0.1:6379> GEODIST china:city beijing chongqi km # 查看重庆到北京的直线距离
-"1464.0708"
-127 .0.0.1:6379> GEORADIUS china:city 110 30 1000 km  # 以 110 ， 30 这个经纬度为中心，寻
-找方圆1000km内的城市
-1 ) "chongqi"
-2 ) "xian"
-3 ) "shengzhen"
-4 ) "hangzhou"
-127 .0.0.1:6379> GEORADIUS china:city 110 30 500 km
-1 ) "chongqi"
-2 ) "xian"
-127 .0.0.1:6379> GEORADIUS china:city 110 30 500 km withdist  # 显示到中间距离的位置
-1 ) 1 ) "chongqi"
-2 ) "341.9374"
-2 ) 1 ) "xian"
-2 ) "483.8340"
-127 .0.0.1:6379> GEORADIUS china:city 110 30 500 km withcoord  # 显示他人的定位信息
-1 ) 1 ) "chongqi"
-2 ) 1 ) "106.49999767541885376"
- 2 ) "29.52999957900659211"
-2 ) 1 ) "xian"
-2 ) 1 ) "108.96000176668167114"
- 2 ) "34.25999964418929977"
-127 .0.0.1:6379> GEORADIUS china:city 110 30 500 km withdist withcoord count 1 #
-筛选出指定的结果！
-1 ) 1 ) "chongqi"
-2 ) "341.9374"
-3 ) 1 ) "106.49999767541885376"
- 2 ) "29.52999957900659211"
-127 .0.0.1:6379> GEORADIUS china:city 110 30 500 km withdist withcoord count 2
-1 ) 1 ) "chongqi"
-2 ) "341.9374"
-3 ) 1 ) "106.49999767541885376"
- 2 ) "29.52999957900659211"
-2 ) 1 ) "xian"
-2 ) "483.8340"
-3 ) 1 ) "108.96000176668167114"
- 2 ) "34.25999964418929977"
-bilibili：狂神说Java
-```
-
-#### GEORADIUSBYMEMBER
-
-```
-GEOHASH 命令 - 返回一个或多个位置元素的 Geohash 表示
-```
-
-该命令将返回 11 个字符的Geohash字符串!
-
-```
-GEO 底层的实现原理其实就是 Zset！我们可以使用Zset命令来操作geo！
-```
-
-## Hyperloglog
-
-#### 什么是基数？
-
-#### A {1,3,5,7,8,7}
-
-#### B{1，3,5,7,8}
-
-#### 基数（不重复的元素） = 5，可以接受误差！
-
-#### 简介
-
-Redis 2.8.9 版本就更新了 Hyperloglog 数据结构！
-
-Redis Hyperloglog 基数统计的算法！
-
-#### # 找出位于指定元素周围的其他元素！
-
-```
-127 .0.0.1:6379> GEORADIUSBYMEMBER china:city beijing 1000 km
-1 ) "beijing"
-2 ) "xian"
-127 .0.0.1:6379> GEORADIUSBYMEMBER china:city shanghai 400 km
-1 ) "hangzhou"
-2 ) "shanghai"
-```
-
-#### # 将二维的经纬度转换为一维的字符串，如果两个字符串越接近，那么则距离越近！
-
-```
-127 .0.0.1:6379> geohash china:city beijing chongqi
-1 ) "wx4fbxxfke0"
-2 ) "wm5xzrybty0"
-127 .0.0.1:6379> ZRANGE china:city 0 -1 # 查看地图中全部的元素
-1 ) "chongqi"
-2 ) "xian"
-3 ) "shengzhen"
-4 ) "hangzhou"
-5 ) "shanghai"
-6 ) "beijing"
-127 .0.0.1:6379> zrem china:city beijing  # 移除指定元素！
-(integer) 1
-127 .0.0.1:6379> ZRANGE china:city 0 -1
-1 ) "chongqi"
-2 ) "xian"
-3 ) "shengzhen"
-4 ) "hangzhou"
-5 ) "shanghai"
-bilibili：狂神说Java
-```
-
-#### 优点：占用的内存是固定，2^64 不同的元素的技术，只需要废 12KB内存！如果要从内存角度来比较的
-
-话 Hyperloglog 首选！
-
-**网页的 UV （一个人访问一个网站多次，但是还是算作一个人！）**
-
-传统的方式， set 保存用户的id，然后就可以统计 set 中的元素数量作为标准判断!
-
-这个方式如果保存大量的用户id，就会比较麻烦！我们的目的是为了计数，而不是保存用户id；
-
-0.81% 错误率！ 统计UV任务，可以忽略不计的！
-
-#### 测试使用
-
-如果允许容错，那么一定可以使用 Hyperloglog ！
-
-如果不允许容错，就使用 set 或者自己的数据类型即可！
-
-## Bitmap
-
-#### 为什么其他教程都不喜欢讲这些？这些在生活中或者开发中，都有十分多的应用场景，学习了，就是就
-
-#### 是多一个思路！
-
-#### 技多不压身！
-
-#### 位存储
-
-#### 统计用户信息，活跃，不活跃！ 登录 、 未登录！ 打卡， 365 打卡！ 两个状态的，都可以使用
-
-Bitmaps！
-
-Bitmap 位图，数据结构！ 都是操作二进制位来进行记录，就只有 0 和 1 两个状态！
-
-365 天 = 365 bit 1字节 = 8bit 46 个字节左右！
-
-#### 测试
-
-```
-127 .0.0.1:6379> PFadd mykey a b c d e f g h i j # 创建第一组元素 mykey
-(integer) 1
-127 .0.0.1:6379> PFCOUNT mykey  # 统计 mykey 元素的基数数量
-(integer) 10
-127 .0.0.1:6379> PFadd mykey2 i j z x c v b n m # 创建第二组元素 mykey2
-(integer) 1
-127 .0.0.1:6379> PFCOUNT mykey2
-(integer) 9
-127 .0.0.1:6379> PFMERGE mykey3 mykey mykey2  # 合并两组 mykey mykey2 => mykey3 并集
-OK
-127 .0.0.1:6379> PFCOUNT mykey3  # 看并集的数量！
-(integer) 15
-bilibili：狂神说Java
-```
-
-使用bitmap 来记录 周一到周日的打卡！
-
-周一： 1 周二： 0 周三： 0 周四：1 ......
-
-#### 查看某一天是否有打卡！
-
-#### 统计操作，统计 打卡的天数！
 
 # 事务
 
-Redis 事务本质：一组命令的集合！ 一个事务中的所有命令都会被序列化，在事务执行过程的中，会按
-照顺序执行！
+Redis 事物本质是一组命令的集合。在事务执行过程的中，会按照顺序执行。
 
-一次性、顺序性、排他性！执行一些列的命令！
+1. 一次性
+2. 顺序性
+3. 排他性
 
-Redis事务没有没有隔离级别的概念！
+**注意：所有的命令在事务中，并没有直接被执行！只有发起执行命令的时候才会执行！Exec**
 
-所有的命令在事务中，并没有直接被执行！只有发起执行命令的时候才会执行！Exec
+redis的事务案例：
 
-Redis单条命令式保存原子性的，但是事务不保证原子性！
-
-redis的事务：
-
-```
-开启事务（multi）
-命令入队（......）
-执行事务（exec）
-```
-
-#### 正常执行事务！
+- 执行事务
 
 ```
-127 .0.0.1:6379> getbit sign 3
-(integer) 1
-127 .0.0.1:6379> getbit sign 6
-(integer) 0
-127 .0.0.1:6379> bitcount sign  # 统计这周的打卡记录，就可以看到是否有全勤！
-(integer) 3
------- 队列 set set set 执行------
-127 .0.0.1:6379> multi  # 开启事务
+127.0.0.1:6379> multi     //开启事务
 OK
-# 命令入队
-127 .0.0.1:6379> set k1 v1
-bilibili：狂神说Java
+127.0.0.1:6379> set a1 1
+QUEUED
+127.0.0.1:6379> set a2 2
+QUEUED
+127.0.0.1:6379> exec    //执行事务
+1) OK
+2) OK
+127.0.0.1:6379> get a1
+"1"
+127.0.0.1:6379> get a2
+"2"
 ```
 
-#### 放弃事务！
+- 放弃事务
 
-#### 编译型异常（代码有问题！ 命令有错！） ，事务中所有的命令都不会被执行！
+  编译型异常（代码有问题！ 命令有错！） ，事务中所有的命令都不会被执行！
 
-#### 运行时异常（1/0）， 如果事务队列中存在语法性，那么执行命令的时候，其他命令是可以正常执行
+  运行时异常（1/0）， 如果事务队列中存在语法性，那么执行命令的时候，其他命令是可以正常执行的，错误命令抛出异常！
 
-#### 的，错误命令抛出异常！
-
-#### QUEUED
-
-127 .0.0.1:6379> set k2 v2
-QUEUED
-127 .0.0.1:6379> get k2
-QUEUED
-127 .0.0.1:6379> set k3 v3
-QUEUED
-127 .0.0.1:6379> exec # 执行事务
-1 ) OK
-2 ) OK
-3 ) "v2"
-4 ) OK
-
-127 .0.0.1:6379> multi # 开启事务
+```
+127.0.0.1:6379> multi
 OK
-127 .0.0.1:6379> set k1 v1
+127.0.0.1:6379> set a1 3
 QUEUED
-127 .0.0.1:6379> set k2 v2
+127.0.0.1:6379> set a2 4
 QUEUED
-127 .0.0.1:6379> set k4 v4
-QUEUED
-127 .0.0.1:6379> DISCARD # 取消事务
+127.0.0.1:6379> discard  //放弃事务
 OK
-127 .0.0.1:6379> get k4 # 事务队列中命令都不会被执行！
-(nil)
-
-127 .0.0.1:6379> multi
-OK
-127 .0.0.1:6379> set k1 v1
-QUEUED
-127 .0.0.1:6379> set k2 v2
-QUEUED
-127 .0.0.1:6379> set k3 v3
-QUEUED
-127 .0.0.1:6379> getset k3 # 错误的命令
-(error) ERR wrong number of arguments for 'getset' command
-127 .0.0.1:6379> set k4 v4
-QUEUED
-127 .0.0.1:6379> set k5 v5
-QUEUED
-127 .0.0.1:6379> exec # 执行事务报错！
-(error) EXECABORT Transaction discarded because of previous errors.
-127 .0.0.1:6379> get k5 # 所有的命令都不会被执行！
-(nil)
-
+127.0.0.1:6379> get a1
+"1"
+127.0.0.1:6379> get a2
+"2"
 ```
-bilibili：狂神说Java
-监控！ Watch （面试常问！）
-```
-
-#### 悲观锁：
-
-#### 很悲观，认为什么时候都会出问题，无论做什么都会加锁！
-
-#### 乐观锁：
-
-#### 很乐观，认为什么时候都不会出问题，所以不会上锁！ 更新数据的时候去判断一下，在此期间是否
-
-#### 有人修改过这个数据，
-
-```
-获取version
-更新的时候比较 version
-Redis测监视测试
-```
-
-#### 正常执行成功！
-
-测试多线程修改值 , 使用watch 可以当做redis的乐观锁操作！
-
-```
-127 .0.0.1:6379> set k1 "v1"
-OK
-127 .0.0.1:6379> multi
-OK
-127 .0.0.1:6379> incr k1  # 会执行的时候失败！
-QUEUED
-127 .0.0.1:6379> set k2 v2
-QUEUED
-127 .0.0.1:6379> set k3 v3
-QUEUED
-127 .0.0.1:6379> get k3
-QUEUED
-127 .0.0.1:6379> exec
-1 ) (error) ERR value is not an integer or out of range  # 虽然第一条命令报错了，但是
-依旧正常执行成功了！
-2 ) OK
-3 ) OK
-4 ) "v3"
-127 .0.0.1:6379> get k2
-"v2"
-127 .0.0.1:6379> get k3
-"v3"
-127 .0.0.1:6379> set money 100
-OK
-127 .0.0.1:6379> set out 0
-OK
-127 .0.0.1:6379> watch money # 监视 money 对象
-OK
-127 .0.0.1:6379> multi # 事务正常结束，数据期间没有发生变动，这个时候就正常执行成功！
-OK
-127 .0.0.1:6379> DECRBY money 20
-QUEUED
-127 .0.0.1:6379> INCRBY out 20
-QUEUED
-127 .0.0.1:6379> exec
-1 ) (integer) 80
-2 ) (integer) 20
-bilibili：狂神说Java
-```
-
-#### 如果修改失败，获取最新的值就好
-
-# Jedis
-
-我们要使用 Java 来操作 Redis，知其然并知其所以然，授人以渔！ 学习不能急躁，慢慢来会很快！
-
-```
-什么是Jedis 是 Redis 官方推荐的 java连接开发工具！ 使用Java 操作Redis 中间件！如果你要使用
-java操作redis，那么一定要对Jedis 十分的熟悉！
-```
-
-#### 测试
-
-#### 1 、导入对应的依赖
-
-```
-127 .0.0.1:6379> watch money # 监视 money
-OK
-127 .0.0.1:6379> multi
-OK
-127 .0.0.1:6379> DECRBY money 10
-QUEUED
-127 .0.0.1:6379> INCRBY out 10
-QUEUED
-127 .0.0.1:6379> exec  # 执行之前，另外一个线程，修改了我们的值，这个时候，就会导致事务执行失
-败！
-(nil)
-<!--导入jedis的包-->
-<dependencies>
-<!-- https://mvnrepository.com/artifact/redis.clients/jedis -->
-<dependency>
-<groupId>redis.clients</groupId>
-<artifactId>jedis</artifactId>
-<version>3.2.0</version>
-</dependency>
-<!--fastjson-->
-<dependency>
-<groupId>com.alibaba</groupId>
-<artifactId>fastjson</artifactId>
-<version>1.2.62</version>
-</dependency>
-</dependencies>
-bilibili：狂神说Java
-```
-
-#### 2 、编码测试：
-
-#### 连接数据库
-
-#### 操作命令
-
-#### 断开连接！
-
-#### 输出：
-
-## 常用的API
-
-String
-
-List
-
-Set
-
-Hash
-
-Zset
-
-```
-所有的api命令，就是我们对应的上面学习的指令，一个都没有变化！
-```
-
-#### 事务
-
-```
-package com.kuang;
-import redis.clients.jedis.Jedis;
-public class TestPing {
-public static void main(String[] args) {
-// 1、 new Jedis 对象即可
-Jedis jedis = new Jedis("127.0.0.1", 6379 );
-// jedis 所有的命令就是我们之前学习的所有指令！所以之前的指令学习很重要！
-System.out.println(jedis.ping());
-}
-}
-public class TestTX {
-public static void main(String[] args) {
-Jedis jedis = new Jedis("127.0.0.1", 6379 );
-jedis.flushDB();
-JSONObject jsonObject = new JSONObject();
-jsonObject.put("hello","world");
-jsonObject.put("name","kuangshen");
-// 开启事务
-Transaction multi = jedis.multi();
-String result = jsonObject.toJSONString();
-bilibili：狂神说Java
-```
-
-# SpringBoot整合
-
-SpringBoot 操作数据：spring-data jpa jdbc mongodb redis！
-
-SpringData 也是和 SpringBoot 齐名的项目！
-
-说明： 在 SpringBoot2.x 之后，原来使用的jedis 被替换为了 lettuce?
-
-jedis : 采用的直连，多个线程操作的话，是不安全的，如果想要避免不安全的，使用 jedis pool 连接
-池！ 更像 BIO 模式
-
-lettuce : 采用netty，实例可以再多个线程中进行共享，不存在线程不安全的情况！可以减少线程数据
-了，更像 NIO 模式
-
-源码分析：
-
-```
-// jedis.watch(result)
-try {
-multi.set("user1",result);
-multi.set("user2",result);
-int i = 1 / 0 ; // 代码抛出异常事务，执行失败！
-multi.exec(); // 执行事务！
-} catch (Exception e) {
-multi.discard(); // 放弃事务
-e.printStackTrace();
-} finally {
-System.out.println(jedis.get("user1"));
-System.out.println(jedis.get("user2"));
-jedis.close(); // 关闭连接
-}
-}
-}
-@Bean
-@ConditionalOnMissingBean(name = "redisTemplate") // 我们可以自己定义一个
-redisTemplate来替换这个默认的！
-public RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory
-redisConnectionFactory)
-throws UnknownHostException {
-// 默认的 RedisTemplate 没有过多的设置，redis 对象都是需要序列化！
-// 两个泛型都是 Object, Object 的类型，我们后使用需要强制转换 <String, Object>
-RedisTemplate<Object, Object> template = new RedisTemplate<>();
-template.setConnectionFactory(redisConnectionFactory);
-return template;
-}
-@Bean
-@ConditionalOnMissingBean // 由于 String 是redis中最常使用的类型，所以说单独提出来了一
-个bean！
-public StringRedisTemplate stringRedisTemplate(RedisConnectionFactory
-redisConnectionFactory)
-throws UnknownHostException {
-StringRedisTemplate template = new StringRedisTemplate();
-template.setConnectionFactory(redisConnectionFactory);
-return template;
-bilibili：狂神说Java
-```
-
-#### 整合测试一下
-
-#### 1 、导入依赖
-
-#### 2 、配置连接
-
-#### 3 、测试！
-
-#### }
-
-```
-<!-- 操作redis -->
-<dependency>
-<groupId>org.springframework.boot</groupId>
-<artifactId>spring-boot-starter-data-redis</artifactId>
-</dependency>
-# 配置redis
-spring.redis.host=127.0.0.1
-spring.redis.port= 6379
-@SpringBootTest
-class Redis02SpringbootApplicationTests {
-@Autowired
-private RedisTemplate redisTemplate;
-@Test
-void contextLoads() {
-// redisTemplate 操作不同的数据类型，api和我们的指令是一样的
-// opsForValue 操作字符串 类似String
-// opsForList 操作List 类似List
-// opsForSet
-// opsForHash
-// opsForZSet
-// opsForGeo
-// opsForHyperLogLog
-// 除了进本的操作，我们常用的方法都可以直接通过redisTemplate操作，比如事务，和基本的
-CRUD
-// 获取redis的连接对象
-// RedisConnection connection =
-redisTemplate.getConnectionFactory().getConnection();
-// connection.flushDb();
-// connection.flushAll();
-redisTemplate.opsForValue().set("mykey","关注狂神说公众号");
-System.out.println(redisTemplate.opsForValue().get("mykey"));
-}
-}
-bilibili：狂神说Java
-```
-
-#### 关于对象的保存：
-
-我们来编写一个自己的 RedisTemplete
-
-```
-package com.kuang.config;
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.PropertyAccessor;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.data.redis.connection.RedisConnectionFactory;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
-import org.springframework.data.redis.serializer.StringRedisSerializer;
-@Configuration
-public class RedisConfig {
-bilibili：狂神说Java
-```
-
-所有的redis操作，其实对于java开发人员来说，十分的简单，更重要是要去理解redis的思想和每一种数
-据结构的用处和作用场景！
 
 # Redis.conf详解
 
-#### 启动的时候，就通过配置文件来启动！
-
-#### 工作中，一些小小的配置，可以让你脱颖而出！
-
-#### 行家有没有，出手就知道
-
-#### 单位
-
-#### // 这是我给大家写好的一个固定模板，大家在企业中，拿去就可以直接使用！
-
-```
-// 自己定义了一个 RedisTemplate
-@Bean
-@SuppressWarnings("all")
-public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory
-factory) {
-// 我们为了自己开发方便，一般直接使用 <String, Object>
-RedisTemplate<String, Object> template = new RedisTemplate<String,
-Object>();
-template.setConnectionFactory(factory);
-// Json序列化配置
-Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new
-Jackson2JsonRedisSerializer(Object.class);
-ObjectMapper om = new ObjectMapper();
-om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
-om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
-jackson2JsonRedisSerializer.setObjectMapper(om);
-// String 的序列化
-StringRedisSerializer stringRedisSerializer = new
-StringRedisSerializer();
-// key采用String的序列化方式
-template.setKeySerializer(stringRedisSerializer);
-// hash的key也采用String的序列化方式
-template.setHashKeySerializer(stringRedisSerializer);
-// value序列化方式采用jackson
-template.setValueSerializer(jackson2JsonRedisSerializer);
-// hash的value序列化方式采用jackson
-template.setHashValueSerializer(jackson2JsonRedisSerializer);
-template.afterPropertiesSet();
-return template;
-}
-}
-bilibili：狂神说Java
-```
-
-1 、配置文件 unit单位 对大小写不敏感！
-
-#### 包含
-
-就是好比我们学习Spring、Improt， include
-
-#### 网络
-
-#### 通用 GENERAL
+## 通用 
 
 ```
 bind 127 .0.0.1  # 绑定的ip
@@ -1379,44 +779,46 @@ protected-mode yes # 保护模式
 port 6379 # 端口设置
 daemonize yes # 以守护进程的方式运行，默认是 no，我们需要自己开启为yes！
 pidfile /var/run/redis_6379.pid  # 如果以后台的方式运行，我们就需要指定一个 pid 文件！
-# 日志
+databases 16 # 数据库的数量，默认是 16 个数据库
+always-show-logo yes # 是否总是显示LOGO
+```
+
+## 日志
+
+```
 # Specify the server verbosity level.
 # This can be one of:
-bilibili：狂神说Java
-```
-
-#### 快照
-
-持久化， 在规定的时间内，执行了多少次操作，则会持久化到文件 .rdb. aof
-
-redis 是内存数据库，如果没有持久化，那么数据断电及失！
-
-#### REPLICATION 复制，我们后面讲解主从复制的，时候再进行讲解
-
-#### SECURITY 安全
-
-可以在这里设置redis的密码，默认是没有密码！
-
-```
 # debug (a lot of information, useful for development/testing)
 # verbose (many rarely useful info, but not a mess like the debug level)
 # notice (moderately verbose, what you want in production probably) 生产环境
 # warning (only very important / critical messages are logged)
 loglevel notice
 logfile "" # 日志的文件位置名
-databases 16 # 数据库的数量，默认是 16 个数据库
-always-show-logo yes # 是否总是显示LOGO
+```
+
+## 快照
+
+持久化， 在规定的时间内，执行了多少次操作，则会持久化到文件 .rdb. aof
+
+redis 是内存数据库，如果没有持久化，那么数据断电及失
+
+```
 # 如果900s内，如果至少有一个1 key进行了修改，我们及进行持久化操作
 save 900 1
 # 如果300s内，如果至少10 key进行了修改，我们及进行持久化操作
 save 300 10
 # 如果60s内，如果至少10000 key进行了修改，我们及进行持久化操作
 save 60 10000
-# 我们之后学习持久化，会自己定义这个测试！
-stop-writes-on-bgsave-error yes # 持久化如果出错，是否还需要继续工作！
-rdbcompression yes # 是否压缩 rdb 文件，需要消耗一些cpu资源！
-rdbchecksum yes # 保存rdb文件的时候，进行错误的检查校验！
+
+stop-writes-on-bgsave-error yes  # 持久化如果出错，是否还需要继续工作！
+rdbcompression yes     # 是否压缩 rdb 文件，需要消耗一些cpu资源！
+rdbchecksum yes    #保存rdb文件的时候，进行错误的检查校验！
 dir ./  # rdb 文件保存的目录！
+```
+
+## 安全
+
+```
 127 .0.0.1:6379> ping
 PONG
 127 .0.0.1:6379> config get requirepass # 获取redis的密码
@@ -1433,32 +835,12 @@ OK
 127 .0.0.1:6379> config get requirepass
 1 ) "requirepass"
 2 ) "123456"
-bilibili：狂神说Java
 ```
 
-#### 限制 CLIENTS
+## 限制 CLIENTS
 
 ```
-APPEND ONLY 模式 aof配置
-```
-
-具体的配置，我们在 Redis持久化 中去给大家详细详解！
-
-# Redis持久化
-
-#### 面试和工作，持久化都是重点！
-
-Redis 是内存数据库，如果不将内存中的数据库状态保存到磁盘，那么一旦服务器进程退出，服务器中
-的数据库状态也会消失。所以 Redis 提供了持久化功能！
-
-## RDB（Redis DataBase）
-
-#### 什么是RDB
-
-在主从复制中，rdb就是备用了！从机上面！
-
-```
-maxclients 10000 # 设置能连接上redis的最大客户端的数量
+maxclients 10000 # 设置能连接上redis的最大客户端的 数量
 maxmemory <bytes>  # redis 配置最大的内存容量
 maxmemory-policy noeviction  # 内存到达上限之后的处理策略
  1 、volatile-lru：只对设置了过期时间的key进行LRU（默认值）
@@ -1473,166 +855,101 @@ appendfilename "appendonly.aof" # 持久化的文件的名字
 # appendfsync always # 每次修改都会 sync。消耗性能
 appendfsync everysec # 每秒执行一次 sync，可能会丢失这1s的数据！
 # appendfsync no # 不执行 sync，这个时候操作系统自己同步数据，速度最快！
-bilibili：狂神说Java
 ```
 
-在指定的时间间隔内将内存中的数据集快照写入磁盘，也就是行话讲的Snapshot快照，它恢复时是将快
-照文件直接读到内存里。
+# Redis持久化
+
+Redis是内存数据库，数据都储存在内存之中，如果redis进程退出，那么数据也会随之消失，因此redis提供了持久化功能来把数据持久化到硬盘中。
+
+## RDB（Redis DataBase）
+
+- 什么是RDB
+
+**在指定的时间间隔内将内存中的数据集快照写入磁盘，也就是快照，它恢复时是将快照文件直接读到内存里。**
 
 Redis会单独创建（fork）一个子进程来进行持久化，会先将数据写入到一个临时文件中，待持久化过程
 都结束了，再用这个临时文件替换上次持久化好的文件。整个过程中，主进程是不进行任何IO操作的。
 这就确保了极高的性能。如果需要进行大规模数据的恢复，且对于数据恢复的完整性不是非常敏感，那
 RDB方式要比AOF方式更加的高效。RDB的缺点是最后一次持久化后的数据可能丢失。我们默认的就是
-RDB，一般情况下不需要修改这个配置！
-
-有时候在生产环境我们会将这个文件进行备份！
+RDB，一般情况下不需要修改这个配置。
 
 rdb保存的文件是dump.rdb 都是在我们的配置文件中快照中进行配置的！
 
-#### 触发机制
+- 触发机制
+  1. save的规则满足的情况下，会自动触发rdb规则
+  2. 执行 flushall 命令，也会触发我们的rdb规则！
+  3. 退出redis，也会产生 rdb 文件！
+  4. 备份就自动生成一个 dump.rdb
 
-1 、save的规则满足的情况下，会自动触发rdb规则
+- 恢复数据
 
-2 、执行 flushall 命令，也会触发我们的rdb规则！
+  1. 只需要将rdb文件放在我们redis启动目录就可以，redis启动的时候会自动检查dump.rdb 恢复其中
+     的数据！
 
-3 、退出redis，也会产生 rdb 文件！
+  2. 查看需要存在的位置
 
-备份就自动生成一个 dump.rdb
+     ```
+     127 .0.0.1:6379> config get dir
+     1 ) "dir"
+     2 ) "/usr/local/bin" # 如果在这个目录下存在 dump.rdb 文件，启动就会自动恢复其中的数据
+     ```
 
-```
-bilibili：狂神说Java
-如果恢复rdb文件！
-```
+- 优点：
+  1. 适合大规模的数据恢复
+  2. 对数据的完整性要不高
 
-1 、只需要将rdb文件放在我们redis启动目录就可以，redis启动的时候会自动检查dump.rdb 恢复其中
-的数据！
+- 缺点
+  1. 需要一定的时间间隔进程操作！如果redis意外宕机了，这个最后一次修改数据就没有的了
+  2. fork进程的时候，会占用一定的内容空间
 
-2 、查看需要存在的位置
+## AOF（Append Only File）
 
-#### 几乎就他自己默认的配置就够用了，但是我们还是需要去学习！
-
-#### 优点：
-
-#### 1 、适合大规模的数据恢复！
-
-#### 2 、对数据的完整性要不高！
-
-#### 缺点：
-
-1 、需要一定的时间间隔进程操作！如果redis意外宕机了，这个最后一次修改数据就没有的了！
-
-2 、fork进程的时候，会占用一定的内容空间！！
-
-### AOF（Append Only File）
-
-将我们的所有命令都记录下来，history，恢复的时候就把这个文件全部在执行一遍！
-
-#### 是什么
-
-```
-127 .0.0.1:6379> config get dir
-1 ) "dir"
-2 ) "/usr/local/bin" # 如果在这个目录下存在 dump.rdb 文件，启动就会自动恢复其中的数据
-bilibili：狂神说Java
-```
+**将我所有执行过的命令都记录下来，恢复的时候就把这个文件全部在执行一遍。**
 
 以日志的形式来记录每个写操作，将Redis执行过的所有指令记录下来（读操作不记录），只许追加文件
 但不可以改写文件，redis启动之初会读取该文件重新构建数据，换言之，redis重启的话就根据日志文件
-的内容将写指令从前到后执行一次以完成数据的恢复工作
+的内容将写指令从前到后执行一次以完成数据的恢复工作。
 
-Aof保存的是 appendonly.aof 文件
+1. Aof保存的是 appendonly.aof 文件
+2. 默认是不开启的，需要手动进行配。只需要将 appendonly 改为yes就开启了 aof，重启生效
+3. 如果这个 aof 文件有错位，则需要修复aof文件，工具 redis-check-aof --fix
+4. 如果文件正常，重启就可以直接恢复了
 
-```
-append
-```
 
-默认是不开启的，我们需要手动进行配置！我们只需要将 appendonly 改为yes就开启了 aof！
 
-重启，redis 就可以生效了！
+- 重写规则说明
 
-如果这个 aof 文件有错位，这时候 redis 是启动不起来的吗，我们需要修复这个aof文件
+  ```
+  no-appendfsync-on-rewrite everysec
+  ```
 
-redis 给我们提供了一个工具 redis-check-aof --fix
+  1. always   执行每条写命令都会将写命令写到磁盘中 
+  2. everysec 每秒将数据从缓冲区刷到磁盘中，可能会丢失一秒的数据（redis 默认使用该策略）
+  3. no 写命令何时刷新的磁盘中，（缓冲区的数据写到硬盘）由操作系统来决定
 
-```
-bilibili：狂神说Java
-```
+|            配置             | 默认值 |                             含义                             |
+| :-------------------------: | :----: | :----------------------------------------------------------: |
+|  auto-aof-rewrite-min-size  |  64MB  |           AOF文件重写需要的尺寸，AOF多大时开启重写           |
+| auto-aof-rewrite-percentage |  100   | AOF文件增长率 (当前AOF文件大小超过上一次重写的AOF 文件大小的百分之多少才会重写) |
 
-#### 如果文件正常，重启就可以直接恢复了！
+- 优点：
+  1. 每一次修改都同步，文件的完整会更加好
+  2. 每秒同步一次，可能会丢失一秒的数据
+  3. 从不同步，效率最高的
 
-#### 重写规则说明
-
-aof 默认就是文件的无限追加，文件会越来越大！
-
-如果 aof 文件大于 64m，太大了！ fork一个新的进程来将我们的文件进行重写！
-
-#### 优点和缺点！
-
-```
-bilibili：狂神说Java
-```
-
-#### 优点：
-
-#### 1 、每一次修改都同步，文件的完整会更加好！
-
-#### 2 、每秒同步一次，可能会丢失一秒的数据
-
-#### 3 、从不同步，效率最高的！
-
-#### 缺点：
-
-1 、相对于数据文件来说，aof远远大于 rdb，修复的速度也比 rdb慢！
-
-2 、Aof 运行效率也要比 rdb 慢，所以我们redis默认的配置就是rdb持久化！
-
-#### 扩展：
-
-#### 1 、RDB 持久化方式能够在指定的时间间隔内对你的数据进行快照存储
-
-#### 2 、AOF 持久化方式记录每次对服务器写的操作，当服务器重启的时候会重新执行这些命令来恢复原始
-
-的数据，AOF命令以Redis 协议追加保存每次写的操作到文件末尾，Redis还能对AOF文件进行后台重
-写，使得AOF文件的体积不至于过大。
-
-3 、只做缓存，如果你只希望你的数据在服务器运行的时候存在，你也可以不使用任何持久化
-
-4 、同时开启两种持久化方式
-
-```
-在这种情况下，当redis重启的时候会优先载入AOF文件来恢复原始的数据，因为在通常情况下AOF
-文件保存的数据集要比RDB文件保存的数据集要完整。
-RDB 的数据不实时，同时使用两者时服务器重启也只会找AOF文件，那要不要只使用AOF呢？作者
-建议不要，因为RDB更适合用于备份数据库（AOF在不断变化不好备份），快速重启，而且不会有
-AOF可能潜在的Bug，留着作为一个万一的手段。
-```
-
-5 、性能建议
-
-```
-因为RDB文件只用作后备用途，建议只在Slave上持久化RDB文件，而且只要 15 分钟备份一次就够
-了，只保留 save 900 1 这条规则。
-如果Enable AOF ，好处是在最恶劣情况下也只会丢失不超过两秒数据，启动脚本较简单只load自
-己的AOF文件就可以了，代价一是带来了持续的IO，二是AOF rewrite 的最后将 rewrite 过程中产
-生的新数据写到新文件造成的阻塞几乎是不可避免的。只要硬盘许可，应该尽量减少AOF rewrite
-的频率，AOF重写的基础大小默认值64M太小了，可以设到5G以上，默认超过原大小100%大小重
-写可以改到适当的数值。
-如果不Enable AOF ，仅靠 Master-Slave Repllcation 实现高可用性也可以，能省掉一大笔IO，也
-减少了rewrite时带来的系统波动。代价是如果Master/Slave 同时倒掉，会丢失十几分钟的数据，
-启动脚本也要比较两个 Master/Slave 中的 RDB文件，载入较新的那个，微博就是这种架构。
-```
+- 缺点
+  1. 相对于数据文件来说，aof远远大于 rdb，修复的速度也比 rdb慢
+  2. Aof 运行效率也要比 rdb 慢，所以我们redis默认的配置就是rdb持久化
 
 # Redis发布订阅
 
 ```
-appendonly no  # 默认是不开启aof模式的，默认是使用rdb方式持久化的，在大部分所有的情况下，
-rdb完全够用！
+appendonly no  # 默认是不开启aof模式的，默认是使用rdb方式持久化的，在大部分所有的情况下，rdb完全够用！
 appendfilename "appendonly.aof" # 持久化的文件的名字
 # appendfsync always # 每次修改都会 sync。消耗性能
 appendfsync everysec # 每秒执行一次 sync，可能会丢失这1s的数据！
 # appendfsync no # 不执行 sync，这个时候操作系统自己同步数据，速度最快！
 # rewrite 重写，
-bilibili：狂神说Java
 ```
 
 Redis 发布订阅(pub/sub)是一种消息通信模式：发送者(pub)发送消息，订阅者(sub)接收消息。微信、
