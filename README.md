@@ -1,4 +1,10 @@
 # 1-JavaSE
+ - Java-虚拟机
+   - <a style='text-decoration:none;' href='1-JavaSE/Java-虚拟机/1.对象内存布局.md'>1.对象内存布局.md</a>
+   - <a style='text-decoration:none;' href='1-JavaSE/Java-虚拟机/2.自动内存管理机制.md'>2.自动内存管理机制.md</a>
+   - <a style='text-decoration:none;' href='1-JavaSE/Java-虚拟机/3.垃圾收集器与内存分配策略.md'>3.垃圾收集器与内存分配策略.md</a>
+   - <a style='text-decoration:none;' href='1-JavaSE/Java-虚拟机/4.jvm参数设置.md'>4.jvm参数设置.md</a>
+   - <a style='text-decoration:none;' href='1-JavaSE/Java-虚拟机/9.jvm命令.md'>9.jvm命令.md</a>
  - java-IO
    - <a style='text-decoration:none;' href='1-JavaSE/java-IO/IO对象的分类.pdf'>IO对象的分类.pdf</a>
  - java-反射
@@ -33,50 +39,44 @@
    - <a style='text-decoration:none;' href='2-JavaEE/spring/spring源码1-注册配置bean.md'>spring源码1-注册配置bean.md</a>
    - <a style='text-decoration:none;' href='2-JavaEE/spring/spring源码2-扫描bean.md'>spring源码2-扫描bean.md</a>
    - <a style='text-decoration:none;' href='2-JavaEE/spring/spring源码3-实例化单例对象.md'>spring源码3-实例化单例对象.md</a>
-# 3-Java虚拟机
-  - <a style='text-decoration:none;' href='3-Java虚拟机/1.对象内存布局.md'>1.对象内存布局.md</a>
-  - <a style='text-decoration:none;' href='3-Java虚拟机/2.自动内存管理机制.md'>2.自动内存管理机制.md</a>
-  - <a style='text-decoration:none;' href='3-Java虚拟机/3.垃圾收集器与内存分配策略.md'>3.垃圾收集器与内存分配策略.md</a>
-  - <a style='text-decoration:none;' href='3-Java虚拟机/4.jvm参数设置.md'>4.jvm参数设置.md</a>
-  - <a style='text-decoration:none;' href='3-Java虚拟机/9.jvm命令.md'>9.jvm命令.md</a>
-# 4-数据结构
-# 5-数据库
-  - <a style='text-decoration:none;' href='5-数据库/1.事物四大特性ACID.md'>1.事物四大特性ACID.md</a>
-  - <a style='text-decoration:none;' href='5-数据库/2.并发一致性问题.md'>2.并发一致性问题.md</a>
-  - <a style='text-decoration:none;' href='5-数据库/3.隔离级别.md'>3.隔离级别.md</a>
-  - <a style='text-decoration:none;' href='5-数据库/4.封锁力度.md'>4.封锁力度.md</a>
-  - <a style='text-decoration:none;' href='5-数据库/5.SQL编写规范.md'>5.SQL编写规范.md</a>
+# 3-数据结构
+# 4-数据库
+  - <a style='text-decoration:none;' href='4-数据库/1.事物四大特性ACID.md'>1.事物四大特性ACID.md</a>
+  - <a style='text-decoration:none;' href='4-数据库/2.并发一致性问题.md'>2.并发一致性问题.md</a>
+  - <a style='text-decoration:none;' href='4-数据库/3.隔离级别.md'>3.隔离级别.md</a>
+  - <a style='text-decoration:none;' href='4-数据库/4.封锁力度.md'>4.封锁力度.md</a>
+  - <a style='text-decoration:none;' href='4-数据库/5.SQL编写规范.md'>5.SQL编写规范.md</a>
  - MySQL
-   - <a style='text-decoration:none;' href='5-数据库/MySQL/MySQL查看占用空间.md'>MySQL查看占用空间.md</a>
-   - <a style='text-decoration:none;' href='5-数据库/MySQL/MySQL限制IP登录.md'>MySQL限制IP登录.md</a>
-   - <a style='text-decoration:none;' href='5-数据库/MySQL/Mysql 1175错误.md'>Mysql 1175错误.md</a>
-   - <a style='text-decoration:none;' href='5-数据库/MySQL/Mysql packet bigger 错误.md'>Mysql packet bigger 错误.md</a>
-   - <a style='text-decoration:none;' href='5-数据库/MySQL/mysql 启动，停止.md'>mysql 启动，停止.md</a>
-   - <a style='text-decoration:none;' href='5-数据库/MySQL/mysql 安装、配置远程.md'>mysql 安装、配置远程.md</a>
-   - <a style='text-decoration:none;' href='5-数据库/MySQL/mysql清除表中数据.md'>mysql清除表中数据.md</a>
+   - <a style='text-decoration:none;' href='4-数据库/MySQL/MySQL查看占用空间.md'>MySQL查看占用空间.md</a>
+   - <a style='text-decoration:none;' href='4-数据库/MySQL/MySQL限制IP登录.md'>MySQL限制IP登录.md</a>
+   - <a style='text-decoration:none;' href='4-数据库/MySQL/Mysql 1175错误.md'>Mysql 1175错误.md</a>
+   - <a style='text-decoration:none;' href='4-数据库/MySQL/Mysql packet bigger 错误.md'>Mysql packet bigger 错误.md</a>
+   - <a style='text-decoration:none;' href='4-数据库/MySQL/mysql 启动，停止.md'>mysql 启动，停止.md</a>
+   - <a style='text-decoration:none;' href='4-数据库/MySQL/mysql 安装、配置远程.md'>mysql 安装、配置远程.md</a>
+   - <a style='text-decoration:none;' href='4-数据库/MySQL/mysql清除表中数据.md'>mysql清除表中数据.md</a>
  - oracle
-   - <a style='text-decoration:none;' href='5-数据库/oracle/oralce导库、表空间、用户、数据泵.md'>oralce导库、表空间、用户、数据泵.md</a>
+   - <a style='text-decoration:none;' href='4-数据库/oracle/oralce导库、表空间、用户、数据泵.md'>oralce导库、表空间、用户、数据泵.md</a>
  - redis
-   - <a style='text-decoration:none;' href='5-数据库/redis/redis使用.md'>redis使用.md</a>
-   - <a style='text-decoration:none;' href='5-数据库/redis/redis安装，启动，远程.md'>redis安装，启动，远程.md</a>
-   - <a style='text-decoration:none;' href='5-数据库/redis/redis服务停止，重启，启动.md'>redis服务停止，重启，启动.md</a>
-# 6-分布式框架
+   - <a style='text-decoration:none;' href='4-数据库/redis/redis使用.md'>redis使用.md</a>
+   - <a style='text-decoration:none;' href='4-数据库/redis/redis安装，启动，远程.md'>redis安装，启动，远程.md</a>
+   - <a style='text-decoration:none;' href='4-数据库/redis/redis服务停止，重启，启动.md'>redis服务停止，重启，启动.md</a>
+# 5-分布式框架
  - docker
-   - <a style='text-decoration:none;' href='6-分布式框架/docker/docker安装-基于ubuntu.md'>docker安装-基于ubuntu.md</a>
-   - <a style='text-decoration:none;' href='6-分布式框架/docker/docker安装wordpress.md'>docker安装wordpress.md</a>
-   - <a style='text-decoration:none;' href='6-分布式框架/docker/docker查看mysql数据.md'>docker查看mysql数据.md</a>
+   - <a style='text-decoration:none;' href='5-分布式框架/docker/docker安装-基于ubuntu.md'>docker安装-基于ubuntu.md</a>
+   - <a style='text-decoration:none;' href='5-分布式框架/docker/docker安装wordpress.md'>docker安装wordpress.md</a>
+   - <a style='text-decoration:none;' href='5-分布式框架/docker/docker查看mysql数据.md'>docker查看mysql数据.md</a>
  - springboot
-   - <a style='text-decoration:none;' href='6-分布式框架/springboot/springboot单元测试.md'>springboot单元测试.md</a>
-   - <a style='text-decoration:none;' href='6-分布式框架/springboot/springboot跨域.md'>springboot跨域.md</a>
-# 7-Liunx
-  - <a style='text-decoration:none;' href='7-Liunx/10、liunx进程.md'>10、liunx进程.md</a>
-  - <a style='text-decoration:none;' href='7-Liunx/5、liunx文件.md'>5、liunx文件.md</a>
-  - <a style='text-decoration:none;' href='7-Liunx/liunx免密登录.md'>liunx免密登录.md</a>
-  - <a style='text-decoration:none;' href='7-Liunx/liunx安装jdk.md'>liunx安装jdk.md</a>
-  - <a style='text-decoration:none;' href='7-Liunx/top命令.md'>top命令.md</a>
-  - <a style='text-decoration:none;' href='7-Liunx/ubuntu配置NFS.md'>ubuntu配置NFS.md</a>
-  - <a style='text-decoration:none;' href='7-Liunx/阿里云配置安全组.pdf'>阿里云配置安全组.pdf</a>
-# 8-大数据
+   - <a style='text-decoration:none;' href='5-分布式框架/springboot/springboot单元测试.md'>springboot单元测试.md</a>
+   - <a style='text-decoration:none;' href='5-分布式框架/springboot/springboot跨域.md'>springboot跨域.md</a>
+# 6-Liunx
+  - <a style='text-decoration:none;' href='6-Liunx/10、liunx进程.md'>10、liunx进程.md</a>
+  - <a style='text-decoration:none;' href='6-Liunx/5、liunx文件.md'>5、liunx文件.md</a>
+  - <a style='text-decoration:none;' href='6-Liunx/liunx免密登录.md'>liunx免密登录.md</a>
+  - <a style='text-decoration:none;' href='6-Liunx/liunx安装jdk.md'>liunx安装jdk.md</a>
+  - <a style='text-decoration:none;' href='6-Liunx/top命令.md'>top命令.md</a>
+  - <a style='text-decoration:none;' href='6-Liunx/ubuntu配置NFS.md'>ubuntu配置NFS.md</a>
+  - <a style='text-decoration:none;' href='6-Liunx/阿里云配置安全组.pdf'>阿里云配置安全组.pdf</a>
+# 7-大数据
  - hadoop
-   - <a style='text-decoration:none;' href='8-大数据/hadoop/hadoop搭建.md'>hadoop搭建.md</a>
-   - <a style='text-decoration:none;' href='8-大数据/hadoop/学习路线.md'>学习路线.md</a>
+   - <a style='text-decoration:none;' href='7-大数据/hadoop/hadoop搭建.md'>hadoop搭建.md</a>
+   - <a style='text-decoration:none;' href='7-大数据/hadoop/学习路线.md'>学习路线.md</a>
