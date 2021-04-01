@@ -22,7 +22,7 @@ T2,LILEI,192.168.100.31,no,1,20210331,
 ## 2.创建目标表
 
 ```sql
-create table test_txt
+create table test_goal
 (
  host          VARCHAR2(30),
  user_name VARCHAR2(30),
@@ -42,7 +42,7 @@ create table test_txt
 ```sql
 LOAD DATA
 INFILE *
-APPEND INTO TABLE test_txt
+APPEND INTO TABLE test_goal
 fields terminated by ','
 trailing nullcols 
 (HOST,
@@ -63,39 +63,30 @@ sqlldr FD20180816C/FD20180816C control=C:\Users\hspcadmin\Desktop\ctrl_txt.txt  
 
 ## 1.准备源数据文件
 
-todo
+需要将xlsx或者其他格式另存为cvs格式(已逗号分隔)的文件
+
+[查询垃圾桶的表](img/sqlload源数据文件.xlsx)
 
 ## 2.创建目标表
 
-```sql
-create table test_excel
-(
-  effectivedate        DATE,
-  indexcode     VARCHAR2(20),
-  indexname     VARCHAR2(50),
-  constituentcode VARCHAR2(100),
-  constituentname VARCHAR2(100)
-)
-```
+上述步骤已经创建表
 
 ## 3.写控制文件
 
 ```sql
-LOAD DATA
+load data
 INFILE *
-append INTO TABLE test_excel
+APPEND INTO TABLE test_goal
 fields terminated by ','
-TRAILING NULLCOLS
-(
-  effectivedate  "to_date(:effectivedate,'yyyy-mm-dd')",
-  indexcode,
-  indexname,
-  constituentcode,
-  constituentname
-)
+trailing nullcols 
+(HOST,
+USER_NAME,
+IP_AddrESS,
+PASS,
+JUDge,
+endTIME "to_date(:endTIME ,'yyyy-mm-dd')")
 ```
 
 ## 4.导入数据
 
-sqlldr FD20180816C/FD20180816C control=C:\Users\hspcadmin\Desktop\ctrl_excel.txt  log=C:\Users\hspcadmin\Desktop\sqlload.log data=C:\Users\hspcadmin\Desktop\sqlload源数据文件.xls
-
+sqlldr FD20180816C/FD20180816C control=C:\Users\hspcadmin\Desktop\ctrl_excel.txt  log=C:\Users\hspcadmin\Desktop\sqlload.log data=C:\Users\hspcadmin\Desktop\sqlload源数据文件.csv
