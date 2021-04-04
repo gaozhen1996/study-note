@@ -4,6 +4,7 @@
    - <a style='text-decoration:none;' href='1-JavaSE/Java-虚拟机/2.自动内存管理机制.md'>2.自动内存管理机制.md</a>
    - <a style='text-decoration:none;' href='1-JavaSE/Java-虚拟机/3.垃圾收集器与内存分配策略.md'>3.垃圾收集器与内存分配策略.md</a>
    - <a style='text-decoration:none;' href='1-JavaSE/Java-虚拟机/4.jvm参数设置.md'>4.jvm参数设置.md</a>
+   - <a style='text-decoration:none;' href='1-JavaSE/Java-虚拟机/8.字节码文件解析.md'>8.字节码文件解析.md</a>
    - <a style='text-decoration:none;' href='1-JavaSE/Java-虚拟机/9.jvm命令.md'>9.jvm命令.md</a>
  - java-IO
    - <a style='text-decoration:none;' href='1-JavaSE/java-IO/IO对象的分类.pdf'>IO对象的分类.pdf</a>
@@ -20,7 +21,6 @@
    - <a style='text-decoration:none;' href='1-JavaSE/java-并发/3.java常用线程池.md'>3.java常用线程池.md</a>
    - <a style='text-decoration:none;' href='1-JavaSE/java-并发/4.sleep与wait的区别.md'>4.sleep与wait的区别.md</a>
    - <a style='text-decoration:none;' href='1-JavaSE/java-并发/详解synchronized与Lock的区别与使用 .md'>详解synchronized与Lock的区别与使用 .md</a>
- - java-集合
   - <a style='text-decoration:none;' href='1-JavaSE/java开发规范.md'>java开发规范.md</a>
   - <a style='text-decoration:none;' href='1-JavaSE/mac配置多jdk.md'>mac配置多jdk.md</a>
 # 2-JavaEE
@@ -36,10 +36,18 @@
    - <a style='text-decoration:none;' href='2-JavaEE/nginx/在Ubuntu系统上安装Nginx服务器.md'>在Ubuntu系统上安装Nginx服务器.md</a>
  - spring
    - <a style='text-decoration:none;' href='2-JavaEE/spring/@Configuration与@Component的区别.md'>@Configuration与@Component的区别.md</a>
+   - <a style='text-decoration:none;' href='2-JavaEE/spring/spring执行流程.md'>spring执行流程.md</a>
    - <a style='text-decoration:none;' href='2-JavaEE/spring/spring源码1-注册配置bean.md'>spring源码1-注册配置bean.md</a>
    - <a style='text-decoration:none;' href='2-JavaEE/spring/spring源码2-扫描bean.md'>spring源码2-扫描bean.md</a>
    - <a style='text-decoration:none;' href='2-JavaEE/spring/spring源码3-实例化单例对象.md'>spring源码3-实例化单例对象.md</a>
-# 3-数据结构
+# 3-Liunx
+  - <a style='text-decoration:none;' href='3-Liunx/10、liunx进程.md'>10、liunx进程.md</a>
+  - <a style='text-decoration:none;' href='3-Liunx/5、liunx文件.md'>5、liunx文件.md</a>
+  - <a style='text-decoration:none;' href='3-Liunx/liunx免密登录.md'>liunx免密登录.md</a>
+  - <a style='text-decoration:none;' href='3-Liunx/liunx安装jdk.md'>liunx安装jdk.md</a>
+  - <a style='text-decoration:none;' href='3-Liunx/top命令.md'>top命令.md</a>
+  - <a style='text-decoration:none;' href='3-Liunx/ubuntu配置NFS.md'>ubuntu配置NFS.md</a>
+  - <a style='text-decoration:none;' href='3-Liunx/阿里云配置安全组.pdf'>阿里云配置安全组.pdf</a>
 # 4-数据库
   - <a style='text-decoration:none;' href='4-数据库/1.事物四大特性ACID.md'>1.事物四大特性ACID.md</a>
   - <a style='text-decoration:none;' href='4-数据库/2.并发一致性问题.md'>2.并发一致性问题.md</a>
@@ -56,6 +64,8 @@
    - <a style='text-decoration:none;' href='4-数据库/MySQL/mysql清除表中数据.md'>mysql清除表中数据.md</a>
  - oracle
    - <a style='text-decoration:none;' href='4-数据库/oracle/oralce导库、表空间、用户、数据泵.md'>oralce导库、表空间、用户、数据泵.md</a>
+   - <a style='text-decoration:none;' href='4-数据库/oracle/oralce恢复drop的表数据.md'>oralce恢复drop的表数据.md</a>
+   - <a style='text-decoration:none;' href='4-数据库/oracle/sqlload使用.md'>sqlload使用.md</a>
  - redis
    - <a style='text-decoration:none;' href='4-数据库/redis/redis使用.md'>redis使用.md</a>
    - <a style='text-decoration:none;' href='4-数据库/redis/redis安装，启动，远程.md'>redis安装，启动，远程.md</a>
@@ -68,15 +78,7 @@
  - springboot
    - <a style='text-decoration:none;' href='5-分布式框架/springboot/springboot单元测试.md'>springboot单元测试.md</a>
    - <a style='text-decoration:none;' href='5-分布式框架/springboot/springboot跨域.md'>springboot跨域.md</a>
-# 6-Liunx
-  - <a style='text-decoration:none;' href='6-Liunx/10、liunx进程.md'>10、liunx进程.md</a>
-  - <a style='text-decoration:none;' href='6-Liunx/5、liunx文件.md'>5、liunx文件.md</a>
-  - <a style='text-decoration:none;' href='6-Liunx/liunx免密登录.md'>liunx免密登录.md</a>
-  - <a style='text-decoration:none;' href='6-Liunx/liunx安装jdk.md'>liunx安装jdk.md</a>
-  - <a style='text-decoration:none;' href='6-Liunx/top命令.md'>top命令.md</a>
-  - <a style='text-decoration:none;' href='6-Liunx/ubuntu配置NFS.md'>ubuntu配置NFS.md</a>
-  - <a style='text-decoration:none;' href='6-Liunx/阿里云配置安全组.pdf'>阿里云配置安全组.pdf</a>
-# 7-大数据
+# 6-大数据
  - hadoop
-   - <a style='text-decoration:none;' href='7-大数据/hadoop/hadoop搭建.md'>hadoop搭建.md</a>
-   - <a style='text-decoration:none;' href='7-大数据/hadoop/学习路线.md'>学习路线.md</a>
+   - <a style='text-decoration:none;' href='6-大数据/hadoop/hadoop搭建.md'>hadoop搭建.md</a>
+   - <a style='text-decoration:none;' href='6-大数据/hadoop/学习路线.md'>学习路线.md</a>
