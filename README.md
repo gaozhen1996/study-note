@@ -16,11 +16,13 @@
    - <a style='text-decoration:none;' href='1-JavaSE/java-基础/final关键字.md'>final关键字.md</a>
    - <a style='text-decoration:none;' href='1-JavaSE/java-基础/static关键字.md'>static关键字.md</a>
  - java-并发
+   - <a style='text-decoration:none;' href='1-JavaSE/java-并发/0.并发概略.md'>0.并发概略.md</a>
    - <a style='text-decoration:none;' href='1-JavaSE/java-并发/1.实现多线程方式.md'>1.实现多线程方式.md</a>
    - <a style='text-decoration:none;' href='1-JavaSE/java-并发/2.线程池.md'>2.线程池.md</a>
    - <a style='text-decoration:none;' href='1-JavaSE/java-并发/3.java常用线程池.md'>3.java常用线程池.md</a>
    - <a style='text-decoration:none;' href='1-JavaSE/java-并发/4.sleep与wait的区别.md'>4.sleep与wait的区别.md</a>
    - <a style='text-decoration:none;' href='1-JavaSE/java-并发/详解synchronized与Lock的区别与使用 .md'>详解synchronized与Lock的区别与使用 .md</a>
+ - java-集合
   - <a style='text-decoration:none;' href='1-JavaSE/java开发规范.md'>java开发规范.md</a>
   - <a style='text-decoration:none;' href='1-JavaSE/mac配置多jdk.md'>mac配置多jdk.md</a>
 # 2-JavaEE
@@ -48,6 +50,7 @@
   - <a style='text-decoration:none;' href='3-Liunx/top命令.md'>top命令.md</a>
   - <a style='text-decoration:none;' href='3-Liunx/ubuntu配置NFS.md'>ubuntu配置NFS.md</a>
   - <a style='text-decoration:none;' href='3-Liunx/阿里云配置安全组.pdf'>阿里云配置安全组.pdf</a>
+# 3-数据结构
 # 4-数据库
   - <a style='text-decoration:none;' href='4-数据库/1.事物四大特性ACID.md'>1.事物四大特性ACID.md</a>
   - <a style='text-decoration:none;' href='4-数据库/2.并发一致性问题.md'>2.并发一致性问题.md</a>
@@ -72,6 +75,7 @@
    - <a style='text-decoration:none;' href='4-数据库/redis/redis服务停止，重启，启动.md'>redis服务停止，重启，启动.md</a>
 # 5-分布式框架
  - docker
+   - <a style='text-decoration:none;' href='5-分布式框架/docker/docker-nginx配置负载均衡.md'>docker-nginx配置负载均衡.md</a>
    - <a style='text-decoration:none;' href='5-分布式框架/docker/docker安装-基于ubuntu.md'>docker安装-基于ubuntu.md</a>
    - <a style='text-decoration:none;' href='5-分布式框架/docker/docker安装wordpress.md'>docker安装wordpress.md</a>
    - <a style='text-decoration:none;' href='5-分布式框架/docker/docker查看mysql数据.md'>docker查看mysql数据.md</a>
