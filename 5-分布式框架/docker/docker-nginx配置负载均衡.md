@@ -42,7 +42,7 @@ server {
 
 # 3. 重启nginx
 
-docker run --name nginx -p 80:80 -v /Users/gaozhen/config-file/nginx/nginx.conf:/etc/nginx/nginx.conf -v /Users/gaozhen/config-file/nginx/log:/var/log/nginx -v /Users/gaozhen/config-file/nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf -d nginx
+docker run --name nginx -p 80:80  -v /Users/gaozhen/config-file/nginx/nginx.conf:/etc/nginx/nginx.conf -v /Users/gaozhen/config-file/nginx/log:/var/log/nginx -v /Users/gaozhen/config-file/nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf -d nginx 
 
 - --name: 为nginx容器指定一个名称方便管理
 - -p: 将nginx内部80端口代理到宿主机80端口,可以通过宿主机80访问nginx 80端口
