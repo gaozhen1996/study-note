@@ -77,7 +77,7 @@ func (self *CataLogUtil) readDir(level int , path string) {
 			pre = "#"
 		}else{
 			for i := level ; i>0 ; i--{
-				pre = pre + " "
+				pre = pre + "  "
 			}
 			pre = pre + "-"
 		}
